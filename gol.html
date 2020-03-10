@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Game of Life</title>
+    <link href="css/gol.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Game of life</h1>
+    <table id="gol-container">
+    </table>
+  </body>
+</html>
+
+ 
+<script type="text/javascript">
+
+  function setup() {
+    let row = [
+                [0, 1, 1, 0, 1, 0],
+                [1, 0, 1, 0, 0, 1],
+                [0, 0, 1, 1, 0, 0],
+                [1, 1, 0, 0, 1, 1],
+                [0, 1, 1, 0, 0, 1],
+                [1, 1, 0 ,1 ,0 ,0]
+              ];
+    return row;
+  }
+
+  function renderTable(daten, rowCount) {
+      let table = document.getElementById('gol-container');
+      let row = document.createElement('tr');
+
+ 
+
+      for (let counter = 0; counter < 6; counter++) {
+        let cell = document.createElement('td');
+        row.appendChild(cell);
+        if (daten[rowCount][counter] === 1) {
+          cell.className += " alive";
+        }
+      }
+       table.appendChild(row);
+  }
+
+  // Der Bereich mit der Action, die man im Browser sieht
+   let startdaten = setup();
+  for (let table = 0; table < 6; table++) {
+    renderTable(startdaten, table);
+  }
+
+</script>

@@ -1,0 +1,19 @@
+/* Überschrift */
+h1 {
+  text-align: center;
+}
+
+/* Tabelle */
+table {
+  margin: auto;
+}
+
+td {
+  background: #f4f7f8;
+  height: 50px;
+  width: 50px;
+}
+
+td.alive {
+  background: green;
+}
