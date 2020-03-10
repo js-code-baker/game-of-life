@@ -34,7 +34,7 @@ function renderTable(daten, rowCount) {
 
     for (let counter = 0; counter < 6; counter++) {
         let cell = erzeugeTabellenZelle();
-        fügeDerZelleHinzu(row, cell);
+        fügeDerZeileHinzu(row, cell);
         if (daten[rowCount][counter] === 1) {
             setzeZelleAufAlive(cell);
         }
@@ -43,16 +43,16 @@ function renderTable(daten, rowCount) {
 }
 
 // Wrapper für JavaScript Funktionen
-function setzeZelleAufAlive(cell) {
-    cell.className += " alive";
+function setzeZelleAufAlive(zelle) {
+    zelle.className += " alive";
 }
 
-function fügeDerTabelleHinzu(table, row) {
-    table.appendChild(row);
+function fügeDerTabelleHinzu(tabelle, zeile) {
+    tabelle.appendChild(zeile);
 }
 
-function fügeDerZelleHinzu(row, cell) {
-    row.appendChild(cell);
+function fügeDerZeileHinzu(zeile, zelle) {
+    zeile.appendChild(zelle);
 }
 
 function erzeugeTabellenZelle() {
