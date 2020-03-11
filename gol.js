@@ -6,8 +6,7 @@ window.onload = () => {
     let startdaten = setup();
     let lebendeNachbarn = 0;
     let toteNachbarn = 0;
-    // Prüfungen (Aufgabe 1 - 4)
-    // Beispiel Aufgabe 1
+
     if (startdaten [0][0] === 1) {
       console.log('Meine erste Zelle lebt.');
     } else {
@@ -40,10 +39,48 @@ window.onload = () => {
       console.log('Meine erste Zelle hat '+ lebendeNachbarn +' lebendeNachbarn.');
       console.log('Meine erste Zelle hat '+ toteNachbarn +' lebendeNachbarn.');
 
-    // startdaten -> hole Inhalt von position 0,0 check
-    // prüfe (if) Inhalt auf 0 oder 1
-    // bei Inhalt 0 "ist tot"
-    // bei Inhalt 1 "lebt"
+//Aufgabe 5:
+
+if  ( startdaten[0][0] === 0 &&
+      startdaten[0][1] === 1 &&
+      startdaten[1][0] === 1 &&
+      startdaten[1][1] === 1)  {
+      startdaten[0][0] = 1;  console.log('Ich lebe in der nächten Runde.');
+} else {
+   console.log('Ich bin weiterhin tot.');
+
+let anzahlNachbarn = 0;
+if (startdaten[0][0] === 1 && anzahlNachbarn < 2) { startdaten[0][0] = 0;
+                           console.log('Ich bin weiterhin am leben')};
+
+if (startdaten[0][1] === 1) { anzahlNachbarn++; }
+if (startdaten[1][0] === 1) { anzahlNachbarn++; }
+if (startdaten[1][1] === 1) { anzahlNachbarn++; }
+
+
+
+
+/* if (startdaten[0][0] === 1 && startdaten[0][1] === 1 && startdaten[1][0] === 1 ||
+                              startdaten[0][1] === 1 && startdaten[1][1] === 1 ||
+                              startdaten[1][0] === 1 && startdaten[1][1] === 1 ||
+                              startdaten[0][1] === 1 && startdaten[1][0] === 1 &&
+                              startdaten[1][1] === 1) {
+                      startdaten[0][0] = 1; console.log('Ich bin weiterhin am leben.')*/
+                           }
+if (startdaten[0][0] === 1 && startdaten[0][1] === 0 && startdaten [1][0] === 0 &&
+                               startdaten[1][1] === 1 ||
+                               startdaten[0][1] === 0 && startdaten [1][1] === 0 &&
+                               startdaten[1][0] === 1 ||
+                               startdaten[1][1] === 0 && startdaten [1][0] === 0 &&
+                               startdaten[0][1] === 1 ) {
+                                 startdaten[0][0] = 0; console.log('Ich werde sterben.')
+                               }
+
+
+
+
+
+
     // Zeichnen (rendern) des Spielfeldes in der HTML Datei
     for (let tabelle = 0; tabelle < 6; tabelle++) {
         renderTable(startdaten, tabelle);
