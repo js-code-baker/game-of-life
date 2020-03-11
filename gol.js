@@ -49,6 +49,7 @@ if  ( startdaten[0][0] === 0 &&
 } else {
    console.log('Ich bin weiterhin tot.');
 
+//Aufgabe 6
 let anzahlNachbarn = 0;
 if (startdaten[0][0] === 1 && anzahlNachbarn < 2) { startdaten[0][0] = 0;
                            console.log('Ich bin weiterhin am leben')};
@@ -57,16 +58,14 @@ if (startdaten[0][1] === 1) { anzahlNachbarn++; }
 if (startdaten[1][0] === 1) { anzahlNachbarn++; }
 if (startdaten[1][1] === 1) { anzahlNachbarn++; }
 
-
-
-
 /* if (startdaten[0][0] === 1 && startdaten[0][1] === 1 && startdaten[1][0] === 1 ||
                               startdaten[0][1] === 1 && startdaten[1][1] === 1 ||
                               startdaten[1][0] === 1 && startdaten[1][1] === 1 ||
                               startdaten[0][1] === 1 && startdaten[1][0] === 1 &&
                               startdaten[1][1] === 1) {
-                      startdaten[0][0] = 1; console.log('Ich bin weiterhin am leben.')*/
-                           }
+                      startdaten[0][0] = 1; console.log('Ich bin weiterhin am leben.')
+                    }*/
+// Aufgabe 7
 if (startdaten[0][0] === 1 && startdaten[0][1] === 0 && startdaten [1][0] === 0 &&
                                startdaten[1][1] === 1 ||
                                startdaten[0][1] === 0 && startdaten [1][1] === 0 &&
