@@ -17,3 +17,7 @@ td {
 td.alive {
   background: green;
 }
+button  {
+  display: block;
+  margin: auto;
+}
