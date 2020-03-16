@@ -3,117 +3,21 @@ window.onload = function () {
   // Der Bereich mit der Action, die man im Browser sieht
   var knöpfchen = holeKnopfMitId('knopf');
   knöpfchen.addEventListener('click', myButton);
-  // Startdaten
-  let startdaten = setup();
-  let ersteRunde = setup();
-  let lebendeNachbarn = 0;
-  let toteNachbarn = 0;
+  // aktuelleRunde
+  let aktuelleRunde = setup();
 
-  if (startdaten[0][0] === 1) {
-    console.log('Meine erste Zelle lebt.');
-  } else {
-    console.log('Meine erste Zelle ist tot.');
-  }
-
-  if (startdaten[0][1] === 1) {
-    console.log('Und mein Rechter Nachbar, der lebt.')
-    lebendeNachbarn++;
-  } else {
-    console.log('Und mein Rechter Nachbar, der ist tot.')
-    toteNachbarn++;
-  }
-
-  if (startdaten[1][0] === 1) {
-    console.log('Die Zelle unter mir lebt.')
-    lebendeNachbarn++;
-  } else {
-    console.log('DIe Zelle unter mir ist tot.')
-    toteNachbarn++;
-  }
-
-  if (startdaten[1][1] === 1) {
-    console.log('Die Zelle schräk unter mir lebt.')
-    lebendeNachbarn++;
-  } else {
-    console.log('Die Zelle schräk unter mir ist tot.')
-    toteNachbarn++;
-  }
-  console.log('Meine erste Zelle hat ' + lebendeNachbarn + ' lebendeNachbarn.');
-  console.log('Meine erste Zelle hat ' + toteNachbarn + ' lebendeNachbarn.');
-
-  //Aufgabe 5:
-
-  if (startdaten[0][0] === 0 &&
-    startdaten[0][1] === 1 &&
-    startdaten[1][0] === 1 &&
-    startdaten[1][1] === 1) {
-    ersteRunde[0][0] = 1; console.log('Ich lebe in der nächten Runde.');
-  } else {
-    console.log('Ich bin weiterhin tot.');
-
-    //Aufgabe 6
-    let anzahlNachbarn = 0;
-
-    if (startdaten[0][1] === 1) { anzahlNachbarn++; }
-    if (startdaten[1][0] === 1) { anzahlNachbarn++; }
-    if (startdaten[1][1] === 1) { anzahlNachbarn++; }
-
-    if (startdaten[0][0] === 1 && anzahlNachbarn === 2 || anzahlNachbarn === 3) {
-      ersteRunde[0][0] = 1;
-      console.log('>>Ich bin weiterhin am leben')
-    };
-
-
-    /* if (startdaten[0][0] === 1 && startdaten[0][1] === 1 && startdaten[1][0] === 1 ||
-                                  startdaten[0][1] === 1 && startdaten[1][1] === 1 ||
-                                  startdaten[1][0] === 1 && startdaten[1][1] === 1 ||
-                                  startdaten[0][1] === 1 && startdaten[1][0] === 1 &&
-                                  startdaten[1][1] === 1) {
-                          startdaten[0][0] = 1; console.log('Ich bin weiterhin am leben.')
-                        }*/
-    // Aufgabe 7
-    if (startdaten[0][0] === 1 && startdaten[0][1] === 0 && startdaten[1][0] === 0 &&
-      startdaten[1][1] === 1 ||
-      startdaten[0][1] === 0 && startdaten[1][1] === 0 &&
-      startdaten[1][0] === 1 ||
-      startdaten[1][1] === 0 && startdaten[1][0] === 0 &&
-      startdaten[0][1] === 1) {
-      ersteRunde[0][0] = 0;
-      console.log('Ich werde sterben.')
-    }
-    //Aufgabe 8
-    let anzahlNachbarn1 = 0;
-
-    if (startdaten[0][1] === 1) { anzahlNachbarn1++; }
-    if (startdaten[1][0] === 1) { anzahlNachbarn1++; }
-    if (startdaten[1][1] === 1) { anzahlNachbarn1++; }
-
-    if (startdaten[0][0] === 1 && anzahlNachbarn1 > 3) {
-      ersteRunde[0][0] = 0;
-      console.log('Ich werde sterben !')
-    };
-
-    //Aufgabe 13 1.Zelle
-
-    // AUfgabe 13 2.Zelle
-
-    //Aufgabe 13 3.Zelle
-
-    //Aufgabe 13 4.Zelle
-
-    //Aufgab 13 5.Zelle
-
-    //Aufgabe 12 6.Zelle
-
-    // Zeichnen (rendern) des Spielfeldes in der HTML Datei
-    for (let tabelle = 0; tabelle < 6; tabelle++) {
-      renderTable(startdaten, tabelle);
-    }
-
-  }
+  zeichneTabelle(aktuelleRunde);
 
   // Hier definieren wir die benötigten Funktionen
-  function berechneNachbarn(daten, y, x) {
+  function zeichneTabelle(zellen) {
+    for (let tabellenZeile = 0; tabellenZeile < 6; tabellenZeile++) {
+      zeichneZeile(zellen, tabellenZeile);
+    }
+  }
+  
+  function gibNächstenStatus(daten, y, x) {
+    // JSON.parse(JSON.stringify()) kopiert ein Objekt (deep copy)
+    let rundenVeraenderung = JSON.parse(JSON.stringify(daten))
     let lebendeNachbarn3 = 0;
     let toteNachbarn3 = 0;
 
@@ -124,7 +28,6 @@ window.onload = function () {
      // console.log('Nachbar nicht vorhanden');
     }
     try {
-      debugger;
       if (daten[y][x - 1] === 1) { lebendeNachbarn3++ }
       else if (daten[y][x - 1] === 0) { toteNachbarn3++ }
     } catch (Exception) {
@@ -170,9 +73,9 @@ window.onload = function () {
 
     if (daten[y][x] === 1) {
       console.log('Ich bin die ' + (6 * y + x + 1) + '.Zelle,ich lebe und ich habe ' +
-        lebendeNachbarn3 + ' lebende Nachbarn, und ' + toteNachbarn3 + ' tote Nachbarn')
+        lebendeNachbarn3 + ' lebende Nachbarn, und ' + toteNachbarn3 + ' tote Nachbarn');
     } else {
-      console.log('Ich bin die ' + (6 * y + x + 1) + '.Zelle,ich bin tot und ich habe ' +
+      console.log('Ich bin die ' + (6 * y + x + 1) + '.Zelle ,ich bin tot und ich habe ' +
         lebendeNachbarn3 + ' lebende Nachbarn, und ' + toteNachbarn3 + ' tote Nachbarn');
     }
 
@@ -180,30 +83,32 @@ window.onload = function () {
 
   //aufgabe 14
 
-  if (daten[y][x] === 0 && lebendeNachbarn3 === 3) { ersteRunde[y][x] = 1 }
-  if (daten[y][x] === 1 && lebendeNachbarn3 < 2) { ersteRunde[y][x] = 0 }
+  if (daten[y][x] === 0 && lebendeNachbarn3 === 3) { rundenVeraenderung[y][x] = 1 }
+  if (daten[y][x] === 1 && lebendeNachbarn3 < 2) { rundenVeraenderung[y][x] = 0 }
   if (daten[y][x] === 1 && (lebendeNachbarn3 === 2
-    || lebendeNachbarn3 === 3)) { ersteRunde[y][x] = 1 }
-  if (daten[y][x] === 1 && lebendeNachbarn3 > 3) { ersteRunde[y][x] = 0 }
+    || lebendeNachbarn3 === 3)) { rundenVeraenderung[y][x] = 1 }
+  if (daten[y][x] === 1 && lebendeNachbarn3 > 3) { rundenVeraenderung[y][x] = 0 }
 
-  console.log(ersteRunde[y][x])
+  console.log(rundenVeraenderung[y][x]);
+  return rundenVeraenderung[y][x];
 }
+
 
 
 function setup() {
   let zeile =
     [
-      [1, 1, 1, 0, 1, 0],
-      [1, 0, 1, 0, 0, 1],
-      [0, 0, 1, 1, 0, 0],
-      [1, 1, 0, 0, 1, 1],
-      [0, 1, 1, 0, 0, 1],
-      [1, 1, 0, 1, 0, 0]
+      [0, 1, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0, 0],
+      [1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
     ];
   return zeile;
 }
 
-function renderTable(daten, zeilenZahl) {
+function zeichneZeile(daten, zeilenZahl) {
   let tabelle = holeHtmlTabelle();
   let zeile = erzeugeTabellenZeile();
 
@@ -246,12 +151,25 @@ function holeKnopfMitId(id) {
   return document.getElementById(id);
 }
 
+
 function myButton() {
   console.log();
+  let nächsteRunde = setup();
+
+  
   for (let zeilenÜbergang = 0; zeilenÜbergang < 6; zeilenÜbergang++) {
+    var nächsteZeile = [];
     for (let nächsteRundeZelle = 0; nächsteRundeZelle < 6; nächsteRundeZelle++) {
-      berechneNachbarn(startdaten, zeilenÜbergang, nächsteRundeZelle);
+      nächsteZeile.push(gibNächstenStatus(aktuelleRunde, zeilenÜbergang, nächsteRundeZelle));
+      
     }
+    console.log(nächsteZeile);
+    nächsteRunde[zeilenÜbergang] = nächsteZeile;
   }
+  console.log(nächsteRunde)
+  aktuelleRunde = nächsteRunde;
+  // render nächste runde
+  holeHtmlTabelle().innerHTML = "";
+  zeichneTabelle(nächsteRunde);
 }
 }
