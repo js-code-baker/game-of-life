@@ -3,6 +3,9 @@ window.onload = function () {
   // Der Bereich mit der Action, die man im Browser sieht
   var knöpfchen = holeKnopfMitId('knopf');
   knöpfchen.addEventListener('click', myButton);
+
+  var löschKnopf = holeKnopfMitId('reset');
+  löschKnopf.addEventListener('click', myResetButton);
   // aktuelleRunde
   let aktuelleRunde = setup();
 
@@ -172,4 +175,10 @@ function myButton() {
   holeHtmlTabelle().innerHTML = "";
   zeichneTabelle(nächsteRunde);
 }
+function myResetButton() {
+  aktuelleRunde = startdaten
+     
+  zeichneTabelle();
+}
+
 }
