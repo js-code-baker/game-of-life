@@ -12,6 +12,7 @@ window.onload = function () {
 
   zeichneTabelle(aktuelleRunde);
 
+  //----- Funktionen
   function zeichneTabelle(zellen) {
     for (let tabellenZeile = 0; tabellenZeile < SIZE; tabellenZeile++) {
       zeichneZeile(zellen, tabellenZeile);
