@@ -24,18 +24,14 @@ window.onload = function () {
     let lebendeNachbarn = 0;
 
     // Zähle Nachbarn
-    try {
-      if (daten[y - 1][x - 1] === 1) { lebendeNachbarn++ }
-      if (daten[y][x - 1] === 1) { lebendeNachbarn++ }
-      if (daten[y + 1][x - 1] === 1) { lebendeNachbarn++ }
-      if (daten[y + 1][x] === 1) { lebendeNachbarn++ }
-      if (daten[y + 1][x + 1] === 1) { lebendeNachbarn++ }
-      if (daten[y][x + 1] === 1) { lebendeNachbarn++ }
-      if (daten[y - 1][x + 1] === 1) { lebendeNachbarn++ }
-      if (daten[y - 1][x] === 1) { lebendeNachbarn++ }
-    } catch (error) {
-      // Zugriff auf nicht existierende Zelle außerhalb des Spielbereichs
-    }
+    try { if (daten[y - 1][x - 1] === 1) { lebendeNachbarn++ } } catch (error) { }
+    try { if (daten[y][x - 1] === 1) { lebendeNachbarn++ } } catch (error) { }
+    try { if (daten[y + 1][x - 1] === 1) { lebendeNachbarn++ } } catch (error) { }
+    try { if (daten[y + 1][x] === 1) { lebendeNachbarn++ } } catch (error) { }
+    try { if (daten[y + 1][x + 1] === 1) { lebendeNachbarn++ } } catch (error) { }
+    try { if (daten[y][x + 1] === 1) { lebendeNachbarn++ } } catch (error) { }
+    try { if (daten[y - 1][x + 1] === 1) { lebendeNachbarn++ } } catch (error) { }
+    try { if (daten[y - 1][x] === 1) { lebendeNachbarn++ } } catch (error) { }
 
     // Werte Regeln aus
     if (istTot(daten[y][x]) === 0 && lebendeNachbarn === 3) {
