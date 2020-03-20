@@ -28,49 +28,51 @@ window.onload = function () {
       if (daten[y - 1][x - 1] === 1) { lebendeNachbarn3++ }
       else if (daten[y - 1][x - 1] === 0) { toteNachbarn3++ }
     } catch (Exception) {
-     // console.log('Nachbar nicht vorhanden');
+      console.log('Nachbar nicht vorhanden 1');
     }
     try {
       if (daten[y][x - 1] === 1) { lebendeNachbarn3++ }
       else if (daten[y][x - 1] === 0) { toteNachbarn3++ }
     } catch (Exception) {
-     // console.log('Nachbar nicht vorhanden');
+      console.log('Nachbar nicht vorhanden 2');
     }
     try {
       if (daten[y + 1][x - 1] === 1) { lebendeNachbarn3++ }
       else if (daten[y + 1][x - 1] === 0) { toteNachbarn3++ }
     } catch (Exception) {
-     // console.log('Nachbar nicht vorhanden');
+      console.log('Nachbar nicht vorhanden 3');
     }
     try {
       if (daten[y + 1][x] === 1) { lebendeNachbarn3++ }
       else if (daten[y + 1][x] === 0) { toteNachbarn3++ }
     } catch (Exception) {
-     // console.log('Nachbar nicht vorhanden');
+      console.log('Nachbar nicht vorhanden 4');
     }
     try {
       if (daten[y + 1][x + 1] === 1) { lebendeNachbarn3++ }
       else if (daten[y + 1][x + 1] === 0) { toteNachbarn3++ }
     } catch (Exception) {
-     // console.log('Nachbar nicht vorhanden');
+      console.log('Nachbar nicht vorhanden 5');
     }
     try {
+      console.log('Nachbar 6', daten[y][x + 1],daten)
       if (daten[y][x + 1] === 1) { lebendeNachbarn3++ }
       else if (daten[y][x + 1] === 0) { toteNachbarn3++ }
     } catch (Exception) {
-     // console.log('Nachbar nicht vorhanden');
+      console.log('Nachbar nicht vorhanden 6');
     }
     try {
+      console.log('Nachbar 7', daten[y - 1][x + 1],daten)
       if (daten[y - 1][x + 1] === 1) { lebendeNachbarn3++ }
       else if (daten[y - 1][x + 1] === 0) { toteNachbarn3++ }
     } catch (Exception) {
-     // console.log('Nachbar nicht vorhanden');
+      console.log('Nachbar nicht vorhanden 7');
     }
     try {
       if (daten[y - 1][x] === 1) { lebendeNachbarn3++ }
       else if (daten[y - 1][x] === 0) { toteNachbarn3++ }
     } catch (Exception) {
-     // console.log('Nachbar nicht vorhanden');
+      console.log('Nachbar nicht vorhanden 8');
     }
 
 
@@ -99,17 +101,23 @@ window.onload = function () {
 
 
 function setup() {
-  let zeile =
-    [
-      [0, 1, 0, 0, 0, 0],
-      [0, 0, 1, 0, 0, 0],
-      [1, 1, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0]
-    ];
-  return zeile;
+  let spielfeld = [];
+ 
+
+  for (zeile1 = 0; zeile1 < 6 ; zeile1++) {
+    let zeile = [];
+    for (spalte1 = 0; spalte1 < 6 ; spalte1++) {
+      
+      zeile.push(1); //Berecih für die randomize Fukntion
+    }
+    
+    spielfeld.push(zeile)
+     
+  }
+
+  return spielfeld;
 }
+
 
 function zeichneZeile(daten, zeilenZahl) {
   let tabelle = holeHtmlTabelle();
@@ -176,9 +184,21 @@ function myButton() {
   zeichneTabelle(nächsteRunde);
 }
 function myResetButton() {
-  aktuelleRunde = startdaten
-     
-  zeichneTabelle();
+   aktuelleRunde = setup();
+  holeHtmlTabelle().innerHTML = "";
+  zeichneTabelle(setup());
 }
 
 }
+/*function setup() {
+  let zeile =
+    [
+      [0, 1, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0, 0],
+      [1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
+    ];
+  return zeile;
+}*/
