@@ -36,14 +36,16 @@ window.onload = function () {
     }
   }
 
-  function zeichneZeile(daten, zeilenZahl) {
+  function zeichneZeile(daten, zeilenIndex) {
     let tabelle = holeHtmlTabelle();
     let zeile = erzeugeTabellenZeile();
 
-    for (let zähler = 0; zähler < 6; zähler++) {
+    for (let zellenIndex = 0; zellenIndex < 6; zellenIndex++) {
       let zelle = erzeugeTabellenZelle();
       fügeDerZeileHinzu(zeile, zelle);
-      if (daten[zeilenZahl][zähler] === 1) {
+
+      let istAmLeben = daten[zeilenIndex][zellenIndex] === 1;
+      if (istAmLeben) {
         setzeZelleAufAlive(zelle);
       }
     }
