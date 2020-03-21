@@ -21,10 +21,9 @@ window.onload = function () {
   }
 
   function gibNächstenStatus(daten, y, x) {
-    let rundenVeraenderung = daten.slice(); // daten.slice kopiert ein Array
-    let lebendeNachbarn = 0;
 
     // Zähle Nachbarn
+    let lebendeNachbarn = 0;
     try { if (daten[y - 1][x - 1] === 1) { lebendeNachbarn++ } } catch (error) { }
     try { if (daten[y][x - 1] === 1) { lebendeNachbarn++ } } catch (error) { }
     try { if (daten[y + 1][x - 1] === 1) { lebendeNachbarn++ } } catch (error) { }
@@ -35,28 +34,28 @@ window.onload = function () {
     try { if (daten[y - 1][x] === 1) { lebendeNachbarn++ } } catch (error) { }
 
     // Werte Regeln aus
-    if (istTot(daten[y][x]) === 0 && lebendeNachbarn === 3) {
-      rundenVeraenderung[y][x] = 1;
-    }
-    if (istAmLeben(daten[y][x]) && lebendeNachbarn < 2) {
-      rundenVeraenderung[y][x] = 0;
-    }
-    if (istAmLeben(daten[y][x]) && (lebendeNachbarn === 2 || lebendeNachbarn === 3)) {
-      rundenVeraenderung[y][x] = 1;
-    }
-    if (istAmLeben(daten[y][x]) && lebendeNachbarn > 3) {
-      rundenVeraenderung[y][x] = 0;
+    let statusInDerNächstenRunde;
+    let aktuelleZelle = daten[y][x];
+    let istTot = aktuelleZelle === 0;
+    let istAmLeben = aktuelleZelle === 1;
+
+    if (istTot && lebendeNachbarn === 3) {
+      statusInDerNächstenRunde = 1;
+
+    } else if (istAmLeben) {
+
+      if (lebendeNachbarn < 2) {
+        statusInDerNächstenRunde = 0;
+
+      } else if ((lebendeNachbarn === 2) || (lebendeNachbarn === 3)) {
+        statusInDerNächstenRunde = 1;
+
+      } else if (lebendeNachbarn > 3) {
+        statusInDerNächstenRunde = 0;
+      }
     }
 
-    return rundenVeraenderung[y][x];
-  }
-
-  function istAmLeben(zelle) {
-    return zelle === 1;
-  }
-
-  function istTot(zelle) {
-    return zelle === 0;
+    return statusInDerNächstenRunde;
   }
 
   function setup() {
