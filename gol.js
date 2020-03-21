@@ -1,7 +1,7 @@
 
 window.onload = function () {
   const SIZE = 6;
-  //----- Der Bereich mit der Action, die man im Browser sieht
+  // --- Bereich mit der Action, die man im Browser sieht
   var knöpfchen = holeKnopfMitId('knopf');
   knöpfchen.addEventListener('click', myButton);
 
@@ -11,15 +11,15 @@ window.onload = function () {
   let aktuelleRunde = setup();
 
   zeichneTabelle(aktuelleRunde);
+  // --- ENDE --- Bereich mit der Action, die man im Browser sieht
 
-  //----- Funktionen
+  // --- Game of Life Funktionen ---
   function zeichneTabelle(zellen) {
     for (let tabellenZeile = 0; tabellenZeile < SIZE; tabellenZeile++) {
       zeichneZeile(zellen, tabellenZeile);
     }
   }
 
-  //----- Funktionen
   function gibNächstenStatus(daten, y, x) {
     let rundenVeraenderung = daten.slice(); // daten.slice kopiert ein Array
     let lebendeNachbarn = 0;
@@ -90,6 +90,31 @@ window.onload = function () {
     fügeDerTabelleHinzu(tabelle, zeile);
   }
 
+  function myButton() {
+    let nächsteRunde = setup();
+
+    for (let zeilenÜbergang = 0; zeilenÜbergang < 6; zeilenÜbergang++) {
+      var nächsteZeile = [];
+      for (let nächsteRundeZelle = 0; nächsteRundeZelle < 6; nächsteRundeZelle++) {
+        nächsteZeile.push(gibNächstenStatus(aktuelleRunde, zeilenÜbergang, nächsteRundeZelle));
+
+      }
+      nächsteRunde[zeilenÜbergang] = nächsteZeile;
+    }
+    aktuelleRunde = nächsteRunde;
+    // render nächste runde
+    holeHtmlTabelle().innerHTML = "";
+    zeichneTabelle(nächsteRunde);
+  }
+
+  function myResetButton() {
+    aktuelleRunde = setup();
+    holeHtmlTabelle().innerHTML = "";
+    zeichneTabelle(setup());
+  }
+  // --- ENDE --- Game of Life Funktionen ---
+
+  // --- Hilfsfunktionen zur Arbeit mit HTML Elementen ---
   function setzeZelleAufAlive(zelle) {
     zelle.className += " alive";
   }
@@ -117,28 +142,6 @@ window.onload = function () {
   function holeKnopfMitId(id) {
     return document.getElementById(id);
   }
-
-  function myButton() {
-    let nächsteRunde = setup();
-
-    for (let zeilenÜbergang = 0; zeilenÜbergang < 6; zeilenÜbergang++) {
-      var nächsteZeile = [];
-      for (let nächsteRundeZelle = 0; nächsteRundeZelle < 6; nächsteRundeZelle++) {
-        nächsteZeile.push(gibNächstenStatus(aktuelleRunde, zeilenÜbergang, nächsteRundeZelle));
-
-      }
-      nächsteRunde[zeilenÜbergang] = nächsteZeile;
-    }
-    aktuelleRunde = nächsteRunde;
-    // render nächste runde
-    holeHtmlTabelle().innerHTML = "";
-    zeichneTabelle(nächsteRunde);
-  }
-
-  function myResetButton() {
-    aktuelleRunde = setup();
-    holeHtmlTabelle().innerHTML = "";
-    zeichneTabelle(setup());
-  }
+  // --- ENDE --- Hilfsfunktionen zur Arbeit mit HTML Elementen ---
 
 }
