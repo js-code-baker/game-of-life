@@ -2,14 +2,13 @@
 window.onload = function () {
   const SIZE = 6;
   // --- Bereich mit der Action, die man im Browser sieht
-  var knöpfchen = holeKnopfMitId('knopf');
-  knöpfchen.addEventListener('click', myButton);
+  var nächsteRundeKnopf = holeKnopfMitId('next');
+  nächsteRundeKnopf.addEventListener('click', berechneNächsteGeneration);
 
-  var löschKnopf = holeKnopfMitId('reset');
-  löschKnopf.addEventListener('click', myResetButton);
-  // aktuelleRunde
+  var zurücksetzenKnopf = holeKnopfMitId('reset');
+  zurücksetzenKnopf.addEventListener('click', setzeSpielfeldZurück);
+
   let aktuelleRunde = setup();
-
   zeichneTabelle(aktuelleRunde);
   // --- ENDE --- Bereich mit der Action, die man im Browser sieht
 
@@ -89,7 +88,7 @@ window.onload = function () {
     fügeDerTabelleHinzu(tabelle, zeile);
   }
 
-  function myButton() {
+  function berechneNächsteGeneration() {
     let nächsteRunde = setup();
 
     for (let zeilenÜbergang = 0; zeilenÜbergang < 6; zeilenÜbergang++) {
@@ -106,7 +105,7 @@ window.onload = function () {
     zeichneTabelle(nächsteRunde);
   }
 
-  function myResetButton() {
+  function setzeSpielfeldZurück() {
     aktuelleRunde = setup();
     holeHtmlTabelle().innerHTML = "";
     zeichneTabelle(setup());
