@@ -19,6 +19,20 @@ window.onload = function () {
     }
   }
 
+  function zeichneZeile(daten, zeilenZahl) {
+    let tabelle = holeHtmlTabelle();
+    let zeile = erzeugeTabellenZeile();
+
+    for (let zähler = 0; zähler < 6; zähler++) {
+      let zelle = erzeugeTabellenZelle();
+      fügeDerZeileHinzu(zeile, zelle);
+      if (daten[zeilenZahl][zähler] === 1) {
+        setzeZelleAufAlive(zelle);
+      }
+    }
+    fügeDerTabelleHinzu(tabelle, zeile);
+  }
+
   function gibNächstenStatus(daten, y, x) {
 
     // Zähle Nachbarn
@@ -72,20 +86,6 @@ window.onload = function () {
     }
 
     return spielfeld;
-  }
-
-  function zeichneZeile(daten, zeilenZahl) {
-    let tabelle = holeHtmlTabelle();
-    let zeile = erzeugeTabellenZeile();
-
-    for (let zähler = 0; zähler < 6; zähler++) {
-      let zelle = erzeugeTabellenZelle();
-      fügeDerZeileHinzu(zeile, zelle);
-      if (daten[zeilenZahl][zähler] === 1) {
-        setzeZelleAufAlive(zelle);
-      }
-    }
-    fügeDerTabelleHinzu(tabelle, zeile);
   }
 
   function berechneNächsteGeneration() {
