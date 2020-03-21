@@ -13,6 +13,23 @@ window.onload = function () {
   // --- ENDE --- Bereich mit der Action, die man im Browser sieht
 
   // --- Game of Life Funktionen ---
+  function setup() {
+    let spielfeld = [];
+
+    for (zeile1 = 0; zeile1 < 6; zeile1++) {
+      let zeile = [];
+      for (spalte1 = 0; spalte1 < 6; spalte1++) {
+
+        zeile.push(1); //Berecih für die randomize Fukntion
+      }
+
+      spielfeld.push(zeile)
+
+    }
+
+    return spielfeld;
+  }
+
   function zeichneTabelle(zellen) {
     for (let tabellenZeile = 0; tabellenZeile < SIZE; tabellenZeile++) {
       zeichneZeile(zellen, tabellenZeile);
@@ -69,23 +86,6 @@ window.onload = function () {
     }
 
     return statusInDerNächstenRunde;
-  }
-
-  function setup() {
-    let spielfeld = [];
-
-    for (zeile1 = 0; zeile1 < 6; zeile1++) {
-      let zeile = [];
-      for (spalte1 = 0; spalte1 < 6; spalte1++) {
-
-        zeile.push(1); //Berecih für die randomize Fukntion
-      }
-
-      spielfeld.push(zeile)
-
-    }
-
-    return spielfeld;
   }
 
   function berechneNächsteGeneration() {
