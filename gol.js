@@ -30,6 +30,7 @@ window.onload = function () {
   }
 
   function zeichneTabelle(zellen) {
+    holeHtmlTabelle().innerHTML = ""; // lösche die aktuelle Tabelle aus HTML Seite
     for (let tabellenZeile = 0; tabellenZeile < SIZE; tabellenZeile++) {
       zeichneZeile(zellen, tabellenZeile);
     }
@@ -61,8 +62,7 @@ window.onload = function () {
       nächsteRunde[zeilenÜbergang] = nächsteZeile;
     }
     aktuelleRunde = nächsteRunde;
-    // render nächste runde
-    holeHtmlTabelle().innerHTML = "";
+
     zeichneTabelle(nächsteRunde);
   }
 
@@ -105,7 +105,6 @@ window.onload = function () {
   }
 
   function setzeSpielfeldZurück() {
-    holeHtmlTabelle().innerHTML = ""; // lösche die aktuelle Tabelle aus HTML Seite
     aktuelleRunde = setup();
     zeichneTabelle(aktuelleRunde);
   }
