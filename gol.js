@@ -16,15 +16,14 @@ window.onload = function () {
   function setup() {
     let spielfeld = [];
 
-    for (zeile1 = 0; zeile1 < 6; zeile1++) {
+    for (let zeilenIndex = 0; zeilenIndex < 6; zeilenIndex++) {
       let zeile = [];
-      for (spalte1 = 0; spalte1 < 6; spalte1++) {
-
-        zeile.push(1); //Berecih für die randomize Fukntion
+      
+      for (let spaltenIndex = 0; spaltenIndex < 6; spaltenIndex++) {
+        zeile.push(1); //Bereich für die randomize Funktion
       }
 
       spielfeld.push(zeile)
-
     }
 
     return spielfeld;
