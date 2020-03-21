@@ -49,6 +49,23 @@ window.onload = function () {
     fügeDerTabelleHinzu(tabelle, zeile);
   }
 
+  function berechneNächsteGeneration() {
+    let nächsteRunde = setup();
+
+    for (let zeilenÜbergang = 0; zeilenÜbergang < 6; zeilenÜbergang++) {
+      var nächsteZeile = [];
+      for (let nächsteRundeZelle = 0; nächsteRundeZelle < 6; nächsteRundeZelle++) {
+        nächsteZeile.push(gibNächstenStatus(aktuelleRunde, zeilenÜbergang, nächsteRundeZelle));
+
+      }
+      nächsteRunde[zeilenÜbergang] = nächsteZeile;
+    }
+    aktuelleRunde = nächsteRunde;
+    // render nächste runde
+    holeHtmlTabelle().innerHTML = "";
+    zeichneTabelle(nächsteRunde);
+  }
+
   function gibNächstenStatus(daten, y, x) {
 
     // Zähle Nachbarn
@@ -85,23 +102,6 @@ window.onload = function () {
     }
 
     return statusInDerNächstenRunde;
-  }
-
-  function berechneNächsteGeneration() {
-    let nächsteRunde = setup();
-
-    for (let zeilenÜbergang = 0; zeilenÜbergang < 6; zeilenÜbergang++) {
-      var nächsteZeile = [];
-      for (let nächsteRundeZelle = 0; nächsteRundeZelle < 6; nächsteRundeZelle++) {
-        nächsteZeile.push(gibNächstenStatus(aktuelleRunde, zeilenÜbergang, nächsteRundeZelle));
-
-      }
-      nächsteRunde[zeilenÜbergang] = nächsteZeile;
-    }
-    aktuelleRunde = nächsteRunde;
-    // render nächste runde
-    holeHtmlTabelle().innerHTML = "";
-    zeichneTabelle(nächsteRunde);
   }
 
   function setzeSpielfeldZurück() {
