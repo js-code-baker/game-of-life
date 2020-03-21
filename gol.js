@@ -105,9 +105,9 @@ window.onload = function () {
   }
 
   function setzeSpielfeldZurück() {
+    holeHtmlTabelle().innerHTML = ""; // lösche die aktuelle Tabelle aus HTML Seite
     aktuelleRunde = setup();
-    holeHtmlTabelle().innerHTML = "";
-    zeichneTabelle(setup());
+    zeichneTabelle(aktuelleRunde);
   }
   // --- ENDE --- Game of Life Funktionen ---
 
