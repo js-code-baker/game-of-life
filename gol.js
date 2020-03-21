@@ -18,7 +18,7 @@ window.onload = function () {
 
     for (let zeilenIndex = 0; zeilenIndex < 6; zeilenIndex++) {
       let zeile = [];
-      
+
       for (let spaltenIndex = 0; spaltenIndex < 6; spaltenIndex++) {
         zeile.push(1); //Bereich für die randomize Funktion
       }
