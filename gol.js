@@ -87,23 +87,31 @@ window.onload = function () {
     let istTot = aktuelleZelle === 0;
     let istAmLeben = aktuelleZelle === 1;
 
-    if (istTot && lebendeNachbarn === 3) {
-      statusInDerNächstenRunde = 1;
-
+    if (istTot) {
+      statusInDerNächstenRunde = entstehtLebendeZelle(lebendeNachbarn);
     } else if (istAmLeben) {
-
-      if (lebendeNachbarn < 2) {
-        statusInDerNächstenRunde = 0;
-
-      } else if ((lebendeNachbarn === 2) || (lebendeNachbarn === 3)) {
-        statusInDerNächstenRunde = 1;
-
-      } else if (lebendeNachbarn > 3) {
-        statusInDerNächstenRunde = 0;
-      }
+      statusInDerNächstenRunde = bleibtZelleAmLeben(lebendeNachbarn);
     }
 
     return statusInDerNächstenRunde;
+  }
+
+  function entstehtLebendeZelle(lebendeNachbarn) {
+    return lebendeNachbarn === 3;
+  }
+
+  function bleibtZelleAmLeben(lebendeNachbarn) {
+    let status;
+    if (lebendeNachbarn < 2) {
+      status = 0;
+    }
+    else if ((lebendeNachbarn === 2) || (lebendeNachbarn === 3)) {
+      status = 1;
+    }
+    else if (lebendeNachbarn > 3) {
+      status = 0;
+    }
+    return status;
   }
 
   function setzeSpielfeldZurück() {
